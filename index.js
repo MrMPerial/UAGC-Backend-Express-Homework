@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.json());
-app.use('/', routes);
+app.use('/', router);
 
 app.listen(5000, () => {
   console.log('Your app is listening on port 5000');
