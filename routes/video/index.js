@@ -38,6 +38,11 @@ router.put('/:id', (req, res) => {
   res.status(200).json(video);
 });
 
+router.delete('/:id', (req, res) => {
+  let videoDel = deleteVideo(video, req.body, req.params.id);
+  res.status(200).json(video);
+});
+
 function getVideo(arr, id) {
   let piece;
 
@@ -62,6 +67,19 @@ function updateVideo(arr, info, id) {
   }
 
   return piece;
+}
+
+// I know this is not the correct way to delete, just wanted to try...
+function deleteVideo(arr, info, id) {
+  let piece;
+
+  for(let i = 0; i < arr.length; i++) {
+    if ( id.toString() === arr[i].id.toString() ) {
+      arr[i].title = '';
+
+      piece = arr[i];
+    }
+  }
 }
 
 module.exports = router;
