@@ -26,4 +26,42 @@ router.get('/:id', (req, res) => {
   res.status(200).json(piece);
 });
 
+router.post('/', (req, res) => {
+  let videoId = req.body.id;
+  video.push(req.body);
+  let videoInfo = getVideo(video, videoId);
+  res.status(200).json(video);
+});
+
+router.put('/:id', (req, res) => {
+  let videoInfo = updateVideo(video, req.body, req.params.id);
+  res.status(200).json(video);
+});
+
+function getVideo(arr, id) {
+  let piece;
+
+  for (let i = 0; i < arr.length; i++) {
+    if ( id.toString() === arr[i].id.toString() ) {
+      piece = arr[i];
+    }
+  }
+
+  return piece;
+}
+
+function updateVideo(arr, info, id) {
+  let piece;
+
+  for (let i = 0; i < arr.length; i++) {
+    if ( id.toString() === arr[i].id.toString() ) {
+      arr[i].title = info.title;
+
+      piece = arr[i];
+    }
+  }
+
+  return piece;
+}
+
 module.exports = router;
