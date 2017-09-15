@@ -54,11 +54,31 @@ router.post('/', (req, res) => {
   res.status(200).json(audio);
 });
 
+router.put('/:id', (req, res) => {
+  let audioInfo = updateAudio(audio, req.body, req.params.id);
+  res.status(200).json(audio);
+});
+
 function getAudio(arr, id) {
   let piece;
 
   for (let i = 0; i < arr.length; i++) {
     if ( id.toString() === arr[i].id.toString() ) {
+      piece = arr[i];
+    }
+  }
+
+  return piece;
+}
+
+function updateAudio(arr, info, id) {
+  let piece;
+
+  for (let i = 0; i < arr.length; i++) {
+    if ( id.toString() === arr[i].id.toString() ) {
+      arr[i].artist = info.artist;
+      arr[i].albums = info.albums;
+
       piece = arr[i];
     }
   }
